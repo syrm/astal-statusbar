@@ -1,4 +1,4 @@
-project('simple-bar', 'vala', 'c')
+project('bouh-statusbar', 'vala', 'c')
 
 bindir = get_option('prefix') / get_option('bindir')
 libdir = get_option('prefix') / get_option('libdir')
@@ -37,7 +37,7 @@ sources = files(
 )
 
 executable(
-  'simple-bar',
+  'bouh-statusbar',
   [sources, main],
   dependencies: deps,
   install: true,
