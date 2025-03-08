@@ -1,0 +1,65 @@
+@use "sass:color";
+
+$bg: #212223;
+$fg: #f1f1f1;
+$accent: #378DF7;
+$radius: 7px;
+
+window.Bar {
+    border: none;
+    box-shadow: none;
+    background-color: $bg;
+    color: $fg;
+    font-family: PragmataPro;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #303030;
+    color: #C6C6C6;
+
+    label {
+        margin: 0 8px;
+    }
+
+    .Workspaces  {
+        min-height: 30px;
+
+        button {
+            all: unset;
+            background-color: transparent;
+            box-shadow: inset 0 -3px transparent;
+            padding: 1px 5px 1px 5px;
+
+            &:hover label {
+                color: #303030;
+                background-color: color.adjust($fg, $alpha: -0.34);
+            }
+
+            &:active label {
+                background-color: color.adjust($fg, $alpha: -0.8)
+            }
+        }
+
+        label {
+            transition: 200ms;
+            padding: 0 8px;
+            margin: 2px;
+            border: 1pt solid transparent;
+        }
+
+        .focused label {
+            background: #666;
+        }
+    }
+
+    .Media {
+        margin-left: 30px;
+    }
+
+    .SysTray {
+        button {
+            border: 1px solid #303030;
+            background: #303030;
+            padding: 0 4px;
+        }
+    }
+}
