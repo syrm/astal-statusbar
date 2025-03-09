@@ -4,7 +4,7 @@ A simple bar for Hyprland using
 
 meson setup build --wipe --prefix "$PWD/result"
 meson install -C build
-./result/bin/simple-bar
+./result/bin/bouh-statusbar
 
 
 - [Hyprland library](https://aylur.github.io/astal/guide/libraries/hyprland).

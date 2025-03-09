@@ -65,9 +65,11 @@ class Workspaces : Gtk.Box {
 
 class Media : Gtk.Box {
     AstalMpris.Mpris mpris = AstalMpris.get_default();
+    Gtk.Label label = new Gtk.Label(null);
 
     public Media() {
         Astal.widget_set_class_names(this, {"Media"});
+        add(label);
         mpris.notify["players"].connect(sync);
         sync();
     }
@@ -82,44 +84,25 @@ class Media : Gtk.Box {
     }
 
     void sync() {
-        foreach (var child in get_children())
-            child.destroy();
-
-        if (mpris.players.length() == 0) {
-            add(new Gtk.Label("Nothing Playing"));
-            return;
-        }
-
         var player = getSpotifyPlayer();
-
+        
         if (player == null) {
+            label.set_text("");
             return;
         }
-        
-        //var player = mpris.players.nth_data(1);
-        var label = new Gtk.Label(null);
-        var cover = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0) {
-            valign = Gtk.Align.CENTER
-        };
 
-        Astal.widget_set_class_names(cover, {"Cover"});
         player.bind_property("metadata", label, "label", BindingFlags.SYNC_CREATE, (_, src, ref trgt) => {
+            if (player.playback_status != AstalMpris.PlaybackStatus.PLAYING) {
+                trgt.set_string("");
+                return true;
+            }
+            
             var title = player.title;
             var artist = player.artist;
             trgt.set_string(@"󰵤 $artist - $title");
             return true;
         });
 
-        /*
-        var id = player.notify["cover-art"].connect(() => {
-            var art = player.cover_art;
-            Astal.widget_set_css(cover, @"background-image: url('$art')");
-        });
-        cover.destroy.connect(() => player.disconnect(id));
-        add(cover);
-        */
-
-        add(label);
     }
 }
 
