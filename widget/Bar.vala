@@ -106,6 +106,14 @@ class Media : Gtk.Box {
     }
 }
 
+bool array_search(string needle, string[] haystack) {
+    foreach (string value in haystack) {
+        if (needle.down() == value.down())
+            return true;
+    }
+    return false;
+}
+
 class SysTray : Gtk.Box {
     HashTable<string, Gtk.Widget> items = new HashTable<string, Gtk.Widget>(str_hash, str_equal);
     AstalTray.Tray tray = AstalTray.get_default();
@@ -121,6 +129,45 @@ class SysTray : Gtk.Box {
             return;
 
         var item = tray.get_item(id);
+
+        string[] blacklist = {
+            "spotify",
+            "firebot",
+            "qbittorrent",
+            "steam",
+            "1password"
+        };
+
+        // if (item == null) {
+        //     return;
+        // }
+
+        // print("title ");
+        // print(item.title);
+
+        print(item.to_json_string());
+        print("\n");
+        print("\n");
+        print("\n");
+
+        if (item.tooltip != null) {
+            // print("icon_name ");
+            // print(item.tooltip.icon_name);
+            // print("\n");
+
+            // print("tooltip title ");
+            // print(item.tooltip.title);
+            // print("\n");
+
+            if (array_search(item.tooltip.title, blacklist)) {
+                return;
+            }
+        }
+        
+        if (array_search(item.title, blacklist)) {
+            return;
+        }
+        
         var btn = new Gtk.MenuButton() { use_popover = false, visible = true };
         var icon = new Astal.Icon() { visible = true };
 
