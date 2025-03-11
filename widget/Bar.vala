@@ -186,6 +186,7 @@ class SysTray : Gtk.Box {
 
     void remove_item(string id) {
         if (items.contains(id)) {
+            remove(items.get(id));
             items.remove(id);
         }
     }
