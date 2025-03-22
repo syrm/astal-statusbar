@@ -33,6 +33,7 @@ main = configure_file(
 )
 
 sources = files(
+  'cpu_usage.vala',
   'widget/Bar.vala',
 )
 

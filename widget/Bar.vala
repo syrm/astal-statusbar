@@ -63,6 +63,48 @@ class Workspaces : Gtk.Box {
     }
 }
 
+class Runcat : Gtk.Box {
+    private Gtk.Label cat = new Gtk.Label(null);
+    private int current_chat = 0xe900;
+    private CpuUsage cpu_monitor;
+    private double cpu_usage;
+
+    public Runcat() {
+        Astal.widget_set_class_names(this, {"Runcat"});
+
+        add(cat);
+
+        cpu_monitor = new CpuUsage();
+
+        Timeout.add(500, () => {
+            cpu_usage = cpu_monitor.get_usage();
+            return true;
+        });
+
+        Timeout.add(100, update_cat);
+    }
+
+    private bool update_cat() {
+        cat.set_text(((unichar)(current_chat)).to_string());
+        current_chat++;
+
+        if (current_chat > 0xe904) {
+           current_chat = 0xe900;
+        }
+
+        double usage_factor = cpu_usage / 5.0;
+        double clamped_usage = double.min(20.0, double.max(1.0, usage_factor));
+        double interval_sec = 0.2 / clamped_usage;
+        int delay = (int)(interval_sec * 1000);
+
+        stdout.printf("CPU: %.1f%%, Factor: %.2f, Clamped: %.2f, Interval: %.3fs, Delay: %dms\n", 
+            cpu_usage, usage_factor, clamped_usage, interval_sec, delay);
+
+        Timeout.add(delay, update_cat);
+        return false;
+    }
+}
+
 class Media : Gtk.Box {
     AstalMpris.Mpris mpris = AstalMpris.get_default();
     Gtk.Label label = new Gtk.Label(null);
@@ -214,6 +256,7 @@ class Left : Gtk.Box {
         Object(hexpand: true, halign: Gtk.Align.START);
         add(new Time());
         add(new Media());
+        add(new Runcat());
     }
 }
 
