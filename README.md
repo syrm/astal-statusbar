@@ -9,6 +9,8 @@ meson install -C build
 To run runcat you need to copy the font:
 cp -r runcat.ttf ~/.local/share/fonts
 
+Et voila.
+
 - [Hyprland library](https://aylur.github.io/astal/guide/libraries/hyprland).
 - [Mpris library](https://aylur.github.io/astal/guide/libraries/mpris).
 - [Tray library](https://aylur.github.io/astal/guide/libraries/tray).
