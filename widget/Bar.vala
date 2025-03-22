@@ -97,8 +97,8 @@ class Runcat : Gtk.Box {
         double interval_sec = 0.2 / clamped_usage;
         int delay = (int)(interval_sec * 1000);
 
-        stdout.printf("CPU: %.1f%%, Factor: %.2f, Clamped: %.2f, Interval: %.3fs, Delay: %dms\n", 
-            cpu_usage, usage_factor, clamped_usage, interval_sec, delay);
+        // stdout.printf("CPU: %.1f%%, Factor: %.2f, Clamped: %.2f, Interval: %.3fs, Delay: %dms\n", 
+            // cpu_usage, usage_factor, clamped_usage, interval_sec, delay);
 
         Timeout.add(delay, update_cat);
         return false;
