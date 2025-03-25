@@ -21,6 +21,14 @@ pkgconfig_deps = [
 # needed for GLib.Math
 deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
 
+gnome = import('gnome')
+resources = gnome.compile_resources(
+  'resources',
+  'resources.xml',
+  source_dir: '.',
+  c_name: 'resources'
+)
+
 main = configure_file(
   input: 'app.in.vala',
   output: 'app.vala',
@@ -39,7 +47,7 @@ sources = files(
 
 executable(
   'bouh-statusbar',
-  [sources, main],
+  [sources, main, resources],
   dependencies: deps,
   install: true,
   install_dir: bindir,

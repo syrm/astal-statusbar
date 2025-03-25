@@ -10,7 +10,7 @@ class App : Astal.Application {
         foreach (var mon in this.monitors)
             add_window(new Bar(mon));
 
-        apply_css("@STYLE@");
+        apply_css("""@STYLE@""");
     }
 
     public static void main(string[] args) {

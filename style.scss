@@ -52,13 +52,40 @@ window.Bar {
     }
 
     .Media {
-        margin-left: 30px;
+        margin-left: 5px;
     }
 
     .Runcat {
-        font-family: runcat;
-        font-size: 24px;
+        margin-left: 5px;
+
+        label {
+            color: white;
+            background-size: 30px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .step-1 {
+            background-image: url('resource://bouh/statusbar/cat/my-running-0-symbolic.svg');
+        }
+
+        .step-2 {
+            background-image: url('resource://bouh/statusbar/cat/my-running-1-symbolic.svg');
+        }
+
+        .step-3 {
+            background-image: url('resource://bouh/statusbar/cat/my-running-2-symbolic.svg');
+        }
+
+        .step-4 {
+            background-image: url('resource://bouh/statusbar/cat/my-running-3-symbolic.svg');
+        }
+
+        .step-5 {
+            background-image: url('resource://bouh/statusbar/cat/my-running-4-symbolic.svg');
+        }
     }
+
 
     .SysTray {
         button {

@@ -64,8 +64,8 @@ class Workspaces : Gtk.Box {
 }
 
 class Runcat : Gtk.Box {
-    private Gtk.Label cat = new Gtk.Label(null);
-    private int current_chat = 0xe900;
+    private Gtk.Label cat = new Gtk.Label("     ");
+    private int step = 0;
     private CpuUsage cpu_monitor;
     private double cpu_usage;
 
@@ -85,11 +85,12 @@ class Runcat : Gtk.Box {
     }
 
     private bool update_cat() {
-        cat.set_text(((unichar)(current_chat)).to_string());
-        current_chat++;
+        Astal.widget_set_css(cat, @"background-image: url('resource://bouh/statusbar/cat/my-running-$step-symbolic.svg')");
+        // Astal.widget_set_css(cat, @"background-image: url('resource://bouh/statusbar/mona/mona$step.png')");
+        step++;
 
-        if (current_chat > 0xe904) {
-           current_chat = 0xe900;
+        if (step > 4) {
+           step = 0;
         }
 
         double usage_factor = cpu_usage / 5.0;
@@ -180,27 +181,14 @@ class SysTray : Gtk.Box {
             "1password"
         };
 
-        // if (item == null) {
-        //     return;
-        // }
-
-        // print("title ");
-        // print(item.title);
-
+        /*
         print(item.to_json_string());
         print("\n");
         print("\n");
         print("\n");
+        */
 
         if (item.tooltip != null) {
-            // print("icon_name ");
-            // print(item.tooltip.icon_name);
-            // print("\n");
-
-            // print("tooltip title ");
-            // print(item.tooltip.title);
-            // print("\n");
-
             if (array_search(item.tooltip.title, blacklist)) {
                 return;
             }

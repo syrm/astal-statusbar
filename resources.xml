@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/bouh/statusbar">
+    <file>cat/my-running-0-symbolic.svg</file>
+    <file>cat/my-running-1-symbolic.svg</file>
+    <file>cat/my-running-2-symbolic.svg</file>
+    <file>cat/my-running-3-symbolic.svg</file>
+    <file>cat/my-running-4-symbolic.svg</file>
+    <file>mona/mona0.png</file>
+    <file>mona/mona1.png</file>
+    <file>mona/mona2.png</file>
+    <file>mona/mona3.png</file>
+    <file>mona/mona4.png</file>
+    <file>mona/mona5.png</file>
+    <file>mona/mona6.png</file>
+  </gresource>
+</gresources>
