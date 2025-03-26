@@ -1,9 +1,11 @@
 class Workspaces : Gtk.Box {
     private Gdk.Monitor monitor;
+    private AstalHyprland.Monitor hyprlandMonitor;
 
     AstalHyprland.Hyprland hypr = AstalHyprland.get_default();
     public Workspaces(Gdk.Monitor monitor) {
         this.monitor = monitor;
+        this.hyprlandMonitor = get_matching_hyprland_monitor(this.monitor);
         Astal.widget_set_class_names(this, {"Workspaces"});
         hypr.notify["workspaces"].connect(sync);
         sync();
@@ -38,8 +40,23 @@ class Workspaces : Gtk.Box {
         return 0;
     }
 
+    private AstalHyprland.Monitor? get_matching_hyprland_monitor(Gdk.Monitor gdkMonitor) {
+        var workarea = gdkMonitor.get_workarea();
+
+        foreach (var monitor in hypr.monitors) {
+            if (monitor.x == workarea.x &&
+                monitor.y == workarea.y &&
+                monitor.width == workarea.width &&
+                monitor.height == workarea.height) {
+                return monitor;
+            }
+        }
+
+        return null;
+    }
+
     void setFocusedWorkspace(Gtk.Button btn, AstalHyprland.Workspace ws) {
-        if (hypr.focused_workspace == ws) {
+        if (this.hyprlandMonitor != null && this.hyprlandMonitor.active_workspace == ws) {
             Astal.widget_set_class_names(btn, {"focused"});
         } else {
             Astal.widget_set_class_names(btn, {});
